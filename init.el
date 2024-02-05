@@ -26,7 +26,7 @@
 
 (use-package dimmer
   :config (dimmer-mode t)
-  (dimmer-fraction 0.90)
+  (setq dimmer-fraction 0.70)
   :ensure t)
 
 (use-package mood-line
