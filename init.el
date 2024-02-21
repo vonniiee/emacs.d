@@ -18,6 +18,10 @@
  ;; If there is more than one, they won't work right.
  )
 
+(use-package elcord
+  :config (elcord-mode)
+  :ensure t)
+
 (use-package vterm
   :ensure t)
 
@@ -87,6 +91,9 @@
 (use-package rustic
   :ensure t)
 
+(use-package org
+  
+  :ensure t)
 
 (setq display-line-numbers-type 'relative)
 (global-display-line-numbers-mode)
