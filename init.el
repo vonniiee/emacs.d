@@ -49,6 +49,13 @@
   :config (elcord-mode)
   :ensure t)
 
+(use-package yuck-mode
+  :ensure t)
+
+(use-package parinfer-rust-mode
+  :hook yuck-mode
+  :ensure t)
+
 (use-package vterm
   :ensure t)
 
@@ -123,10 +130,17 @@
   (keymap-global-set "C-c C-a" 'eglot-code-actions)
   :ensure t)
 
+(use-package rust-mode
+  :ensure t)
+
 (use-package typst-ts-mode
   :straight '(:type git :host codeberg :repo "meow_king/typst-ts-mode")
   :config
   (setq typst-ts-watch-options "--open")
+  :ensure t)
+
+(use-package spade-mode
+  :straight '(:type git :host sourcehut :repo "lucasklemmer/spade-mode")
   :ensure t)
 
 (use-package websocket)
@@ -136,13 +150,13 @@
   (setq typst-preview-browser "chromium")
   :ensure t)
 
-(with-eval-after-load 'eglot
-  (with-eval-after-load 'typst-ts-mode
-    (add-to-list 'eglot-server-programs
-                 `((typst-ts-mode) .
-                   ,(eglot-alternatives `(,typst-ts-lsp-download-path
-                                          "tinymist"
-                                          "typst-lsp"))))))
+;(with-eval-after-load 'eglot
+;  (with-eval-after-load 'typst-ts-mode
+;    (add-to-list 'eglot-server-programs
+;                 `((typst-ts-mode) .
+;                   ,(eglot-alternatives `(,typst-ts-lsp-download-path
+;                                          "tinymist"
+;                                          "typst-lsp"))))))
 
 (use-package rustic
   :ensure t)
