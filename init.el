@@ -24,8 +24,16 @@
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (toggle-scroll-bar -1)
+(fringe-mode 1)
+
+(setq display-time-default-load-average nil)
+(display-time-mode t)
+
+(server-start)
 
 (global-set-key (kbd "C-x C-b") 'ibuffer)
+
+(add-to-list 'load-path "/home/siobhan/Projects/ewlc/target/debug/")
 
 (setq straight-use-package-by-default t)
 
@@ -44,6 +52,51 @@
       (goto-char (point-max))
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
+
+(require 'ewlc)
+(ewlc-say-hello "meeee")
+
+(add-to-list 'default-frame-alist
+	     '(vertical-scroll-bars . nil))
+
+(use-package exwm)
+
+(setq exwm-workspace-number 4)
+(add-hook 'exwm-update-class-hook 
+	(lambda () (exwm-workspace-rename-buffer exwm-class-name)))
+(add-hook 'exwm-update-title-hook
+	  (lambda () (exwm-workspace-rename-buffer exwm-class-name)))
+
+(setq exwm-input-global-keys
+      `(([?\s-r] . exwm-reset) ;; s-r: Reset (to line-mode).
+	([?\s-S] . (lambda ()
+		     (interactive)
+		     (shell-command "scrot --select - | copyq copy image/png -")))
+        ([?\s-w] . exwm-workspace-switch) ;; s-w: Switch workspace.
+        ([?\s-&] . (lambda (cmd) ;; s-&: Launch application.
+                     (interactive (list (read-shell-command "$ ")))
+                     (start-process-shell-command cmd nil cmd)))
+        ;; s-N: Switch to certain workspace.
+        ,@(mapcar (lambda (i)
+                    `(,(kbd (format "s-%d" i)) .
+                      (lambda ()
+                        (interactive)
+                        (exwm-workspace-switch-create ,i))))
+                  (number-sequence 0 9))))
+
+(setq exwm-randr-workspace-monitor-plist '(1 "eDP-1" 2 "eDP-2"))
+(add-hook 'exwm-randr-screen-change-hook
+	  (lambda ()
+	    (start-process-shell-command
+	     "xrandr" nil "xrandr --output eDP-1 --above eDP-2 --auto")))
+(exwm-randr-mode 1)
+
+(exwm-enable)
+
+(use-package sudo-edit
+  :ensure t)
+
+(global-set-key (kbd "C-c C-r") 'sudo-edit)
 
 (use-package elcord
   :config (elcord-mode)
@@ -72,10 +125,10 @@
 (use-package free-keys
   :ensure t)
 
-(use-package dimmer
-  :config (dimmer-mode t)
-  (setq dimmer-fraction 0.70)
-  :ensure t)
+;(use-package dimmer
+;  :config (dimmer-mode t)
+;  (setq dimmer-fraction 0.70)
+;  :ensure t)
 
 (use-package mood-line
   :config
@@ -84,9 +137,9 @@
   (mood-line-mode)
   :ensure t)
 
-(use-package disable-mouse
-  :ensure t)
-(global-disable-mouse-mode)
+;(use-package disable-mouse
+;  :ensure t)
+;(global-disable-mouse-mode)
 ;(use-package monokai-theme
 ;  :config (load-theme 'monokai t)
 ;  :ensure t)
