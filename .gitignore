@@ -2,3 +2,7 @@
 
 !.gitignore
 !init.el
+!pretty.el
+!lang.el
+!wm.el
+!notes.el

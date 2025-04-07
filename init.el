@@ -23,12 +23,7 @@
  '(package-selected-packages
    '(typst-ts-mode rg neotree all-the-icons which-key rustic lsp-mode
 		   lsp-ui ef-themes mood-line dimmer elcord company
-		   flycheck vterm symon))
- '(wakatime-api-key
-   (with-temp-buffer
-     (insert-file-contents "~/.emacs.d/.wakatime_api_key")
-     (buffer-string)))
- '(wakatime-cli-path "wakatime"))
+		   flycheck vterm symon)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -36,19 +31,7 @@
  ;; If there is more than one, they won't work right.
  )
 
-(tool-bar-mode -1)
-(menu-bar-mode -1)
-(toggle-scroll-bar -1)
-(fringe-mode 1)
-
-(setq display-time-default-load-average nil)
-(display-time-mode t)
-
-(server-start)
-
 (global-set-key (kbd "C-x C-b") 'ibuffer)
-
-(add-to-list 'load-path "/home/siobhan/Projects/ewlc/target/debug/")
 
 (setq straight-use-package-by-default t)
 
@@ -68,48 +51,18 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
-(require 'ewlc)
-(ewlc-say-hello "meeee")
+(defun include-name (file)
+  (expand-file-name (concat user-emacs-directory file)))
 
-(add-to-list 'default-frame-alist
-	     '(vertical-scroll-bars . nil))
+(load (include-name "wm"))
+(load (include-name "pretty"))
+(load (include-name "lang"))
+(load (include-name "notes"))
 
 (use-package bluetooth
   :ensure t)
 
-(use-package exwm)
-
-(setq exwm-workspace-number 4)
-(add-hook 'exwm-update-class-hook 
-	(lambda () (exwm-workspace-rename-buffer exwm-class-name)))
-(add-hook 'exwm-update-title-hook
-	  (lambda () (exwm-workspace-rename-buffer exwm-class-name)))
-
-(setq exwm-input-global-keys
-      `(([?\s-r] . exwm-reset) ;; s-r: Reset (to line-mode).
-	([?\s-S] . (lambda ()
-		     (interactive)
-		     (shell-command "scrot --select - | copyq copy image/png -")))
-        ([?\s-w] . exwm-workspace-switch) ;; s-w: Switch workspace.
-        ([?\s-&] . (lambda (cmd) ;; s-&: Launch application.
-                     (interactive (list (read-shell-command "$ ")))
-                     (start-process-shell-command cmd nil cmd)))
-        ;; s-N: Switch to certain workspace.
-        ,@(mapcar (lambda (i)
-                    `(,(kbd (format "s-%d" i)) .
-                      (lambda ()
-                        (interactive)
-                        (exwm-workspace-switch-create ,i))))
-                  (number-sequence 0 9))))
-
-(setq exwm-randr-workspace-monitor-plist '(1 "eDP-1" 2 "eDP-2"))
-(add-hook 'exwm-randr-screen-change-hook
-	  (lambda ()
-	    (start-process-shell-command
-	     "xrandr" nil "xrandr --output eDP-1 --above eDP-2 --auto")))
-(exwm-randr-mode 1)
-
-(exwm-enable)
+(global-set-key (kbd "C-c b") 'bluetooth-list-devices)
 
 (use-package sudo-edit
   :ensure t)
@@ -118,13 +71,6 @@
 
 (use-package elcord
   :config (elcord-mode)
-  :ensure t)
-
-(use-package yuck-mode
-  :ensure t)
-
-(use-package parinfer-rust-mode
-  :hook yuck-mode
   :ensure t)
 
 (use-package vterm
@@ -143,49 +89,6 @@
 (use-package free-keys
   :ensure t)
 
-;(use-package dimmer
-;  :config (dimmer-mode t)
-;  (setq dimmer-fraction 0.70)
-;  :ensure t)
-
-(use-package mood-line
-  :config
-  (setq mood-line-glyph-alist mood-line-glyphs-fira-code)
-  (setq mood-line-format mood-line-format-default-extended)
-  (mood-line-mode)
-  :ensure t)
-
-;(use-package disable-mouse
-;  :ensure t)
-;(global-disable-mouse-mode)
-;(use-package monokai-theme
-;  :config (load-theme 'monokai t)
-;  :ensure t)
-
-;(use-package grandshell-theme
-;  :config (load-theme 'grandshell t)
-;  :ensure t)
-
-;(use-package kaolin-themes
-;  :config (load-theme 'kaolin-eclipse t)
-;  :ensure t)
-
-;(use-package ef-themes
-;  :config (load-theme 'ef-bio t)
-;  :ensure t)
-
-(use-package doom-themes
-  :config
-  (setq doom-themes-enable-bold t
-	doom-themes-enable-italic t)
-  (load-theme 'doom-challenger-deep)
-  :ensure t)
-
-  :ensure t
-(use-package all-the-icons
-  :if (display-graphic-p)
-  :ensure t)
-
 (use-package rg
   :config (rg-enable-default-bindings)
   :ensure t)
@@ -198,59 +101,6 @@
   :init (global-flycheck-mode)
   :ensure t)
 
-(use-package which-key
-  :init (which-key-mode)
-  :ensure t)
-
-(use-package eglot
-  :config
-  (add-hook 'rustic-mode-hook 'eglot-ensure)
-  (add-hook 'rust-mode-hook 'eglot-ensure)
-  (keymap-global-set "C-c C-a" 'eglot-code-actions)
-  :ensure t)
-
-(use-package rust-mode
-  :ensure t)
-
-(use-package typst-ts-mode
-  :straight '(:type git :host codeberg :repo "meow_king/typst-ts-mode")
-  :config
-  (setq typst-ts-watch-options "--open")
-  :ensure t)
-
-(use-package spade-mode
-  :straight '(:type git :host sourcehut :repo "lucasklemmer/spade-mode")
-  :ensure t)
-
-(use-package websocket)
-(use-package typst-preview
-  :straight '(:type git :host github :repo "havarddj/typst-preview.el")
-  :config
-  (setq typst-preview-browser "chromium")
-  :ensure t)
-
-(use-package prism
-  :straight '(:type git :host github :repo "alphapapa/prism.el")
-  :ensure t)
-
-;(with-eval-after-load 'eglot
-;  (with-eval-after-load 'typst-ts-mode
-;    (add-to-list 'eglot-server-programs
-;                 `((typst-ts-mode) .
-;                   ,(eglot-alternatives `(,typst-ts-lsp-download-path
-;                                          "tinymist"
-;                                          "typst-lsp"))))))
-
-(use-package magit
-  :ensure t)
-
-(use-package rustic
-  :ensure t)
-
-(use-package org
-  
-  :ensure t)
-
 (defun set-background-for-terminal (&optional frame)
   (or frame (setq frame (selected-frame)))
   "unsets the background color in terminal mode"
@@ -259,19 +109,9 @@
 (add-hook 'after-make-frame-functions 'set-background-for-terminal)
 (add-hook 'window-setup-hook 'set-background-for-terminal)
 
-(setq lsp-rust-analyzer-check-all-targets nil)
-
-(setq display-line-numbers-type 'relative)
-(global-display-line-numbers-mode)
-
-(display-time-mode 1)
-(display-battery-mode 1)
-
-;;(use-package restart-emacs
-;;  :ensure t)
-;; doesn't work in the terminal :(
-
+(use-package magit
+  :ensure t)
 
 (when (fboundp 'windmove-default-keybindings)
-(windmove-default-keybindings))
+ (windmove-default-keybindings))
 
