@@ -39,4 +39,8 @@
 (use-package rustic
   :ensure t)
 
+(use-package company
+  :config (global-company-mode)
+  :ensure t)
+
 (setq lsp-rust-analyzer-check-all-targets nil)

@@ -54,6 +54,7 @@
 (defun include-name (file)
   (expand-file-name (concat user-emacs-directory file)))
 
+(load (include-name "econfig"))
 (load (include-name "wm"))
 (load (include-name "pretty"))
 (load (include-name "lang"))
@@ -91,10 +92,6 @@
 
 (use-package rg
   :config (rg-enable-default-bindings)
-  :ensure t)
-
-(use-package company
-  :config (global-company-mode)
   :ensure t)
 
 (use-package flycheck
