@@ -59,6 +59,8 @@
 (load (include-name "pretty"))
 (load (include-name "lang"))
 (load (include-name "notes"))
+(load (include-name "search"))
+
 
 (use-package bluetooth
   :ensure t)
@@ -69,10 +71,6 @@
   :ensure t)
 
 (global-set-key (kbd "C-c C-r") 'sudo-edit)
-
-(use-package elcord
-  :config (elcord-mode)
-  :ensure t)
 
 (use-package vterm
   :ensure t)

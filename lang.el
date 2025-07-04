@@ -1,3 +1,13 @@
+(use-package tuareg
+  :ensure t)
+
+;(use-package ocaml-eglot
+;  :ensure t
+;  :after tuareg
+;  :hook
+;  (tuareg-mode . ocaml-eglot)
+;  (ocaml-eglot . eglot-ensure))
+
 (use-package yuck-mode
   :ensure t)
 
@@ -44,3 +54,24 @@
   :ensure t)
 
 (setq lsp-rust-analyzer-check-all-targets nil)
+
+(defun asm-mode-hook ()
+  (local-unset-key (vector asm-comment-char))
+  (electric-indent-local-mode)
+  (setq indent-tabs-mode nil)
+
+  (defun asm-calculate-indentation ()
+    (or
+     (and (looking-at "[.@_[:word:]]+:") 0)
+   ;; Same thing for `;;;' comments.
+   (and (looking-at "\\s<\\s<\\s<") 0)
+   ;; %if nasm macro stuff goes to the left margin
+   (and (looking-at "%") 0)
+   (and (looking-at "c?global\\|section\\|default\\|align\\|INIT_..X") 0)
+   ;; Simple `;' comments go to the comment-column
+   ;(and (looking-at "\\s<\\(\\S<\\|\\'\\)") comment-column)
+   ;; The rest goes at column 4
+   (or 4)))
+  )
+
+(add-hook 'asm-mode-hook #'asm-mode-hook)
