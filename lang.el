@@ -46,6 +46,8 @@
 
 (use-package rustic
   :ensure t
+  :config
+  (setq rustic-lsp-client 'eglot)
   :custom
   (rustic-analyzer-command '("rustup" "run" "nightly" "rust-analyzer")))
 
