@@ -58,6 +58,9 @@
 (use-package project)
 (use-package flymake)
 
+(use-package f)
+(use-package s)
+
 (load (include-name "econfig"))
 (load (include-name "wm"))
 (load (include-name "pretty"))

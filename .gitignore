@@ -8,3 +8,5 @@
 !wm.el
 !notes.el
 !search.el
+!machine
+!machine/*

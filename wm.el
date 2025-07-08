@@ -1,6 +1,6 @@
 (use-package exwm)
 
-(setq exwm-workspace-number 4)
+(setq exwm-workspace-number 9)
 (add-hook 'exwm-update-class-hook 
 	  (lambda () (exwm-workspace-rename-buffer (if exwm-class-name
 						       exwm-class-name
@@ -33,11 +33,10 @@
 			(exwm-workspace-move-window ,i))))
 		  (number-sequence 0 9))))
 
-(setq exwm-randr-workspace-monitor-plist '(1 "eDP-1" 2 "eDP-2"))
-(add-hook 'exwm-randr-screen-change-hook
-	  (lambda ()
-	    (start-process-shell-command
-	     "xrandr" nil "xrandr --output eDP-1 --above eDP-2 --auto")))
-
+;; I should probably find a way to split this sort of config based on which machine
+;; I'm using. I only use exwm on my main laptop rn, but i could see myself using it if
+;; I get a desktop in the future. Maybe something with /sys/devices/virtual/dmi/id/board_name
+;; would work well for that. Actually fuck it i'll do that right now.
+(load (include-name (concat "machine/" (s-trim (f-read "/sys/devices/virtual/dmi/id/board_name")))))
 
 (exwm-randr-mode 1)
