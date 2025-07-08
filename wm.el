@@ -1,6 +1,6 @@
 (use-package exwm)
 
-(setq exwm-workspace-number 9)
+(setq exwm-workspace-number 10)
 (add-hook 'exwm-update-class-hook 
 	  (lambda () (exwm-workspace-rename-buffer (if exwm-class-name
 						       exwm-class-name
@@ -16,9 +16,12 @@
 		     (interactive)
 		     (shell-command "scrot --select - | copyq copy image/png -")))
         ([?\s-w] . exwm-workspace-switch) ;; s-w: Switch workspace.
-        ([?\s-&] . (lambda (cmd) ;; s-&: Launch application.
-                     (interactive (list (read-shell-command "$ ")))
-                     (start-process-shell-command cmd nil cmd)))
+        ([?\s-&] . (lambda () ;; s-&: Launch application.
+                     (interactive)
+                     (app-launcher-run-app)))
+	([?\s-*] . (lambda (cmd)
+		     (interactive (list (read-shell-command "$ ")))
+		     (start-process-shell-command cmd nil cmd)))
         ;; s-N: Switch to certain workspace.
         ,@(mapcar (lambda (i)
                     `(,(kbd (format "s-%d" i)) .
@@ -45,3 +48,7 @@
   :bind
   (("C-c b" . bluetooth-list-devices))
   :ensure t)
+
+(use-package app-launcher
+  :straight '(app-launcher :host github :repo "SebastienWae/app-launcher"))
+
