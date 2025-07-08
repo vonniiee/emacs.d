@@ -42,6 +42,6 @@
 (exwm-randr-mode 1)
 
 (use-package bluetooth
+  :bind
+  (("C-c b" . bluetooth-list-devices))
   :ensure t)
-
-(global-set-key (kbd "C-c b") 'bluetooth-list-devices)
