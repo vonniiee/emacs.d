@@ -7,6 +7,6 @@
 !lang.el
 !wm.el
 !notes.el
-!search.el
+!completion.el
 !machine
 !machine/*

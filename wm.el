@@ -40,3 +40,8 @@
 (load (include-name (concat "machine/" (s-trim (f-read "/sys/devices/virtual/dmi/id/board_name")))))
 
 (exwm-randr-mode 1)
+
+(use-package bluetooth
+  :ensure t)
+
+(global-set-key (kbd "C-c b") 'bluetooth-list-devices)

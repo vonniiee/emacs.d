@@ -31,8 +31,6 @@
  ;; If there is more than one, they won't work right.
  )
 
-(global-set-key (kbd "C-x C-b") 'ibuffer)
-
 (setq straight-use-package-by-default t)
 
 (defvar bootstrap-version)
@@ -66,13 +64,7 @@
 (load (include-name "pretty"))
 (load (include-name "lang"))
 (load (include-name "notes"))
-(load (include-name "search"))
-
-
-(use-package bluetooth
-  :ensure t)
-
-(global-set-key (kbd "C-c b") 'bluetooth-list-devices)
+(load (include-name "completion"))
 
 (use-package su
   :init (su-mode +1)
@@ -94,10 +86,6 @@
   :ensure t)
 
 (use-package free-keys
-  :ensure t)
-
-(use-package rg
-  :config (rg-enable-default-bindings)
   :ensure t)
 
 (use-package flycheck
