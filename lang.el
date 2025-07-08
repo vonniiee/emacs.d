@@ -20,13 +20,11 @@
   :ensure t)
 
 (use-package eglot
+  :defer t
   :config
+  (add-hook 'eglot--managed-mode-hook (lambda () (flymake-mode -1)))
   (add-hook 'rustic-mode-hook 'eglot-ensure)
-  (add-hook 'rust-mode-hook 'eglot-ensure)
   (keymap-global-set "C-c C-a" 'eglot-code-actions)
-  :ensure t)
-
-(use-package rust-mode
   :ensure t)
 
 (use-package typst-ts-mode
@@ -47,7 +45,9 @@
   :ensure t)
 
 (use-package rustic
-  :ensure t)
+  :ensure t
+  :custom
+  (rustic-analyzer-command '("rustup" "run" "nightly" "rust-analyzer")))
 
 (use-package company
   :config (global-company-mode)

@@ -54,6 +54,10 @@
 (defun include-name (file)
   (expand-file-name (concat user-emacs-directory file)))
 
+;; I don't know why, but these fix eglot.
+(use-package project)
+(use-package flymake)
+
 (load (include-name "econfig"))
 (load (include-name "wm"))
 (load (include-name "pretty"))
@@ -67,10 +71,11 @@
 
 (global-set-key (kbd "C-c b") 'bluetooth-list-devices)
 
-(use-package sudo-edit
+(use-package su
+  :init (su-mode +1)
+  :config
+  (setq su-sudo-method "su")
   :ensure t)
-
-(global-set-key (kbd "C-c C-r") 'sudo-edit)
 
 (use-package vterm
   :ensure t)
@@ -105,6 +110,7 @@
 (add-hook 'window-setup-hook 'set-background-for-terminal)
 
 (use-package magit
+  :defer t
   :ensure t)
 
 (when (fboundp 'windmove-default-keybindings)
