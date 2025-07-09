@@ -1,6 +1,6 @@
 (tool-bar-mode -1)
 (menu-bar-mode -1)
-(toggle-scroll-bar -1)
+(scroll-bar-mode -1)
 (fringe-mode 1)
 
 (setq display-time-default-load-average nil)
@@ -12,11 +12,15 @@
 (display-time-mode 1)
 (display-battery-mode 1)
 
-(use-package mood-line
-  :config
-  (setq mood-line-glyph-alist mood-line-glyphs-fira-code)
-  (setq mood-line-format mood-line-format-default-extended)
-  (mood-line-mode)
+;;(use-package mood-line
+;;  :config
+;;  (setq mood-line-glyph-alist mood-line-glyphs-fira-code)
+;;  (setq mood-line-format mood-line-format-default-extended)
+;;  (mood-line-mode)
+;;  :ensure t)
+
+(use-package doom-modeline
+  :init (doom-modeline-mode 1)
   :ensure t)
 
 (use-package doom-themes

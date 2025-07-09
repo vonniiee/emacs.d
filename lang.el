@@ -22,7 +22,6 @@
 (use-package eglot
   :defer t
   :config
-  (add-hook 'eglot--managed-mode-hook (lambda () (flymake-mode -1)))
   (add-hook 'rustic-mode-hook 'eglot-ensure)
   (keymap-global-set "C-c C-a" 'eglot-code-actions)
   :ensure t)
