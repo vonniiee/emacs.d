@@ -13,8 +13,9 @@
      '(("Org Mode"
 	("Agenda" (org-agenda nil " ") "a"))
        ("Other"
+	("Terminal" vterm "t")
 	("Projects" project-switch-project "p"))))))
   :ensure t)
 
-(setq initial-buffer-choice 'startup-screen)
+(setq initial-buffer-choice #'enlight)
 (setq inhibit-startup-screen t)
