@@ -20,6 +20,9 @@
      "6fc9e40b4375d9d8d0d9521505849ab4d04220ed470db0b78b700230da0a86c1"
      "b11edd2e0f97a0a7d5e66a9b82091b44431401ac394478beb44389cf54e6db28"
      default))
+ '(org-agenda-files
+   '("/home/siobhan/notes/diary.org" "/home/siobhan/notes/refile.org"
+     "/home/siobhan/notes/todo.org"))
  '(package-selected-packages
    '(typst-ts-mode rg neotree all-the-icons which-key rustic lsp-mode
 		   lsp-ui ef-themes mood-line dimmer elcord company
@@ -65,6 +68,7 @@
 (load (include-name "lang"))
 (load (include-name "notes"))
 (load (include-name "completion"))
+(load (include-name "startup"))
 
 (use-package su
   :init (su-mode +1)

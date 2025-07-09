@@ -8,5 +8,6 @@
 !wm.el
 !notes.el
 !completion.el
+!startup.el
 !machine
 !machine/*
