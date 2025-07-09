@@ -52,7 +52,5 @@
 (use-package app-launcher
   :straight '(app-launcher :host github :repo "SebastienWae/app-launcher"))
 
-(exwm-wm-mode)
-
 ;;; wm.el ends here
 
