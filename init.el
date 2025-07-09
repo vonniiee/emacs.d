@@ -75,21 +75,7 @@
 (use-package vterm
   :ensure t)
 
-(use-package multi-vterm
-  :config
-  (keymap-global-unset "C-t")
-  (keymap-global-set "C-t t" 'multi-vterm-dedicated-toggle)
-  (keymap-global-set "C-t a" 'multi-vterm)
-  (keymap-global-set "C-t n" 'multi-vterm-next)
-  (keymap-global-set "C-t p" 'multi-vterm-prev)
-  (keymap-global-set "C-t f" 'multi-vterm-project)
-  :ensure t)
-
 (use-package free-keys
-  :ensure t)
-
-(use-package flycheck
-  :init (global-flycheck-mode)
   :ensure t)
 
 (defun set-background-for-terminal (&optional frame)

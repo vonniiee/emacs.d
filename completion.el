@@ -18,7 +18,7 @@
 (use-package consult
   :bind
   (("C-x b" . consult-buffer)
-   ("C-c b" . consult-bookmark)
+   ("C-c m" . consult-bookmark)
 
    ("M-s s" . consult-ripgrep)
    

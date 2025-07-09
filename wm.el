@@ -54,3 +54,5 @@
 
 (exwm-wm-mode)
 
+;;; wm.el ends here
+
