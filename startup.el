@@ -13,6 +13,7 @@
      '(("Org Mode"
 	("Agenda" (org-agenda nil " ") "a"))
        ("Other"
+	("Run something" (app-launcher-run-app) "r")
 	("Terminal" (vterm) "t")
 	("Projects" project-switch-project "p"))))))
   :ensure t)
