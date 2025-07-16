@@ -19,6 +19,7 @@
   :bind
   (("C-x b" . consult-buffer)
    ("C-c m" . consult-bookmark)
+   ("C-c i" . consult-imenu)
 
    ("M-s s" . consult-ripgrep)
    
