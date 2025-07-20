@@ -56,6 +56,9 @@
 
 (setq lsp-rust-analyzer-check-all-targets nil)
 
+(use-package glsl-mode
+  :ensure t)
+
 (defun asm-mode-hook ()
   (local-unset-key (vector asm-comment-char))
   (electric-indent-local-mode)
