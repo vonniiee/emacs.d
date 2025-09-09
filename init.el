@@ -35,7 +35,7 @@
  )
 
 (setq straight-use-package-by-default t)
-
+(setq browse-url-generic-program "zen-browser")
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name
@@ -61,6 +61,8 @@
 
 (use-package f)
 (use-package s)
+
+
 
 (load (include-name "econfig"))
 (load (include-name "wm"))

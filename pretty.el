@@ -31,7 +31,6 @@
   :ensure t)
 
 (use-package all-the-icons
-  :if (display-graphic-p)
   :ensure t)
 
 (use-package prism
