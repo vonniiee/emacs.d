@@ -65,7 +65,7 @@
 
 
 (load (include-name "econfig"))
-(load (include-name "wm"))
+;(load (include-name "wm"))
 (load (include-name "pretty"))
 (load (include-name "lang"))
 (load (include-name "notes"))
