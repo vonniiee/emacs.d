@@ -32,9 +32,17 @@
   (setq typst-ts-watch-options "--open")
   :ensure t)
 
-(use-package spade-mode
-  :straight '(:type git :host sourcehut :repo "lucasklemmer/spade-mode")
+(use-package tip
+  :straight '(:type git :host sourcehut :repo "mafty/tip")
+  :config
+  (setq tip-server-basedir (expand-file-name (concat user-emacs-directory "tip-server-py/")))
+  (setq tip-server-port 8111)
+  (add-hook 'typst-ts-mode-hook 'tip-mode)
   :ensure t)
+
+;(use-package spade-mode
+;  :straight '(:type git :host sourcehut :repo "lucasklemmer/spade-mode")
+; :ensure t)
 
 (use-package websocket)
 (use-package typst-preview

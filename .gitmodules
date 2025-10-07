@@ -1,0 +1,3 @@
+[submodule "tip-server-py"]
+	path = tip-server-py
+	url = https://git.sr.ht/~mafty/tip-server-py

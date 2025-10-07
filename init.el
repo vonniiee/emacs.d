@@ -59,6 +59,8 @@
 (use-package project)
 (use-package flymake)
 
+(use-package transient)
+
 (use-package f)
 (use-package s)
 

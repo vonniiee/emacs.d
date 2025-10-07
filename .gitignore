@@ -1,6 +1,7 @@
 *
 
 !.gitignore
+!.gitmodules
 !init.el
 !econfig.el
 !pretty.el
@@ -11,3 +12,5 @@
 !startup.el
 !machine
 !machine/*
+!tip-server-py
+!tip-server-py/*
