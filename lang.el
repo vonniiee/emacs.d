@@ -26,17 +26,22 @@
   (keymap-global-set "C-c C-a" 'eglot-code-actions)
   :ensure t)
 
+;this might error, so M-x typst-ts-mc-install-grammar if that happens.
+;i don't want to include that command under :config, as it clones
+;and builds the grammar on every launch, which is annoying. maybe
+;i'll write something that detects if the grammar needs updating
+;in the future...
 (use-package typst-ts-mode
   :straight '(:type git :host codeberg :repo "meow_king/typst-ts-mode")
   :config
   (setq typst-ts-watch-options "--open")
   :ensure t)
 
+;this package doesn't seem to work all that well. i'll have to write my own.
 (use-package tip
   :straight '(:type git :host sourcehut :repo "mafty/tip")
   :config
   (setq tip-server-basedir (expand-file-name (concat user-emacs-directory "tip-server-py/")))
-  (setq tip-server-port 8111)
   (add-hook 'typst-ts-mode-hook 'tip-mode)
   :ensure t)
 
