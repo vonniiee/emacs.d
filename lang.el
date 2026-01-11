@@ -11,6 +11,9 @@
 (use-package yuck-mode
   :ensure t)
 
+(use-package ein
+  :ensure t)
+
 (use-package parinfer-rust-mode
   :hook yuck-mode
   :ensure t)
